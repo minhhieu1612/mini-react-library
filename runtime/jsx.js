@@ -19,9 +19,10 @@
 
 /**
  * @typedef {object} ReactNode
- * @property {ReactElement} tag
+ * @property {ReactElement} type
  * @property {any} props
  * @property {ReactChildren=} children
+ * @property {HTMLElement=} domNode
  * @property {!ReactNode} _owner
  */
 export class ReactNode {
@@ -36,11 +37,20 @@ export class ReactNode {
     this.props = props;
     this.children = children;
     this._owner = null;
+    this.domNode = null;
   }
 
   bindOwner(owner) {
     this._owner = owner;
     return this;
+  }
+
+  /**
+   * Store dom node data into node
+   * @param {HTMLElement} dom
+   */
+  bindDOM(dom) {
+    this.domNode = dom;
   }
 
   static is(instance) {
@@ -60,10 +70,10 @@ export class ReactNode {
 
 /**
  * @param {ReactElement} type
- * @param {ReactNodePropsType} props
- * @param  {...ReactNode} children
+ * @param {ReactNodePropsType=} props
+ * @param  {ReactChildren=} children
  * @returns
  */
-export const jsx = (type, props, ...children) => {
+export const jsx = (type, props, children) => {
   return new ReactNode(type, props, children);
 };

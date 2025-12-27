@@ -1,6 +1,6 @@
-import { jsx } from "runtime/jsx.js";
-// import Counter from "src/counter";
+import { jsx } from "runtime/jsx";
 import InputRefForm from "src/input-ref-form";
+import Counter from "./counter";
 
 const App = () => {
   return jsx("div", null, [

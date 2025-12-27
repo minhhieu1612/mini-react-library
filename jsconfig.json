@@ -7,5 +7,6 @@
       "runtime/*": ["./runtime/*"]
     }
   },
-  "include": ["src", "runtime"]
+  "include": ["*"],
+  "exclude": ["node_modules"]
 }

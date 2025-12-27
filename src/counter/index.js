@@ -1,6 +1,7 @@
 import { Fragment } from "runtime/dom";
 import { useState } from "runtime/hooks";
 import { jsx } from "runtime/jsx";
+import styles from "./index.module.css";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -15,7 +16,7 @@ export default function Counter() {
 
   return jsx(
     "div",
-    null,
+    { className: styles.container },
     jsx(Fragment, null, [
       jsx("button", { onClick: decrease }, "decrease"),
       jsx("span", null, count),

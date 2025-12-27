@@ -1,5 +1,5 @@
 /**
- * @typedef {string | object | FunctionConstructor} ReactElement
+ * @typedef {string | object | (props: ReactNodePropsType) => ReactNode} ReactElement
  */
 
 /**
@@ -15,6 +15,7 @@
  * @typedef {object} ReactPropsType
  * @property {ReactChildren=} children
  * @property {RefObject=} ref
+ * @property {string=} className
  * @property {FunctionConstructor<PointerEvent<HTMLElement>>=} onClick
  */
 

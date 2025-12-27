@@ -2,7 +2,7 @@
  * @typedef {import("./index.d").ReactElement} ReactElement
  */
 
-import { ReactNode } from "./jsx.js";
+import { ReactNode } from "./jsx";
 
 /**
  * @typedef {import("./index.d").ReactNodePropsType} ReactNodePropsType
@@ -27,6 +27,24 @@ const validTag = (tag) => {
   return ["p", "div", "span", "button", "input"].includes(tag);
 };
 
+const validHtmlelementAsComponents = {
+  FRAGMENT: 11,
+};
+
+/**
+ * Check whether html element is valid component
+ * @param {HTMLElement} comp
+ */
+const validComponentElement = (comp) => {
+  if (!comp) return false;
+
+  if ([validHtmlelementAsComponents.FRAGMENT].includes(comp?.nodeType)) {
+    return true;
+  }
+
+  return false;
+};
+
 /**
  * bind props for native html dom node such as: onClick, ref, style, ...
  * @param {HTMLElement} element
@@ -39,7 +57,7 @@ const processProps = (element, props) => {
     switch (key) {
       case "ref":
         {
-          props.ref = element;
+          props.ref.current = element;
         }
         break;
       case "onClick":
@@ -55,6 +73,11 @@ const processProps = (element, props) => {
           }
         }
         break;
+      case "className":
+        {
+          element.className = value;
+        }
+        break;
     }
   });
 };
@@ -65,58 +88,90 @@ const processProps = (element, props) => {
  * @returns {HTMLElement | null}
  */
 const renderNode = (node) => {
-  switch (typeof node.type) {
-    case "string": {
-      if (!validTag(node.type))
-        throw new Error(`The given tag name "${node.type}" was invalid`);
-      const element = document.createElement(node.type);
+  /** @type {HTMLElement | null} */ let element = null;
 
-      processProps(element, node.props);
+  const processChildren = () => {
+    switch (typeof node.children) {
+      case "object":
+        {
+          if (node.children?.length) {
+            const childDOMs = /** @type {ReactNode[]} */ (node.children).reduce(
+              (res, child) => {
+                let childDOM = child;
 
-      switch (typeof node.children) {
-        case "object":
-          {
-            if (node.children?.length) {
-              element.append(
-                node.children.reduce(
-                  (res, child) =>
-                    res.concat(ReactNode.is(child) ? renderNode(child) : child),
-                  []
-                )
-              );
-            } else {
-              element.append(renderNode(node.children));
-            }
+                if (ReactNode.is(child)) {
+                  child.bindOwner(node);
+                  childDOM = renderNode(child);
+                }
+
+                return [...res, childDOM];
+              },
+              []
+            );
+
+            console.log(childDOMs);
+            element.append(...childDOMs);
+          } else {
+            element.append(
+              ReactNode.is(node.children)
+                ? renderNode(node.children)
+                : node.children
+            );
           }
-          break;
-        case "string":
-        case "boolean":
-        case "number":
-          {
-            element.textContent = node.children;
-          }
-          break;
-      }
-
-      return element;
+        }
+        break;
+      case "string":
+      case "boolean":
+      case "number":
+        {
+          element.textContent = node.children;
+        }
+        break;
     }
+  };
+
+  switch (typeof node.type) {
+    case "string":
+      {
+        if (!validTag(node.type))
+          throw new Error(`The given tag name "${node.type}" was invalid`);
+        element = document.createElement(node.type);
+
+        processProps(element, node.props);
+        processChildren();
+      }
+      break;
     // class component
     // will be handle later
-    case "object": {
-      const classComponentNode = node.render();
+    case "object":
+      {
+        if (node.type?.render && node?.type?.render?.length) {
+          const classComponentNode = node?.type?.render?.();
 
-      return renderNode(classComponentNode);
-    }
-    case "function": {
-      const functionComponentNode = node.type();
+          if (classComponentNode) {
+            element = renderNode(classComponentNode);
+          }
+        } else if (validComponentElement(node.type)) {
+          element = node.type;
+          processChildren();
+        }
+      }
+      break;
+    case "function":
+      {
+        const functionComponentNode = node.type(node.props);
 
-      return renderNode(functionComponentNode);
-    }
+        element = renderNode(functionComponentNode);
+      }
+      break;
     default:
       break;
   }
 
-  return null;
+  if (element) node.bindDOM(element);
+
+  console.log(element, node);
+  return element;
 };
 
 /**
@@ -125,7 +180,7 @@ const renderNode = (node) => {
  * @param {HTMLElement} container
  */
 export const renderRoot = (rootNode, container) => {
-  rootNode.bindOwner(container);
+  rootNode.bindDOM(container);
 
   if (container.firstElementChild) {
     // handle update change here

@@ -9,6 +9,6 @@ export default function InputRefForm() {
 
   return jsx("div", null, [
     jsx("input", { type: "text", ref: inputRef }),
-    jsx("button", { onClick: printRefValue }),
+    jsx("button", { onClick: printRefValue }, "write log"),
   ]);
 }
