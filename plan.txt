@@ -1,0 +1,8 @@
+Mini React project plan
+
+* Ideas:
++ use babel jsx to parse jsx dom content
++ use queue to store changes in the dom tree
++ start with only one node first and ensure it 
+goes through all the cycles of a normal node: mount,
+update, unmount

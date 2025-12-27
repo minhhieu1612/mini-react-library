@@ -1,0 +1,47 @@
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const ROOT_DIR_PATH = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
+  entry: "./index.js",
+  mode: "development",
+  output: { path: path.resolve(ROOT_DIR_PATH, "dist") },
+  devServer: {
+    port: 3000,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              sourceType: "module",
+              presets: [["@babel/preset-env"]],
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      runtime: path.resolve(ROOT_DIR_PATH, "runtime"),
+      src: path.resolve(ROOT_DIR_PATH, "src"),
+    },
+    extensions: [".js", ".css"],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ template: "./index.html" }),
+  ],
+};

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "src/*": ["./src/*"],
+      "runtime/*": ["./runtime/*"]
+    }
+  },
+  "include": ["src", "runtime"]
+}
