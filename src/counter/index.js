@@ -14,6 +14,8 @@ export default function Counter() {
     setCount((prev) => prev + 1);
   };
 
+  console.log(styles);
+
   return jsx(
     "div",
     { className: styles.container },
