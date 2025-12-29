@@ -14,14 +14,12 @@ export default function Counter() {
     setCount((prev) => prev + 1);
   };
 
-  console.log(styles);
-
   return jsx(
     "div",
     { className: styles.container },
     jsx(Fragment, null, [
       jsx("button", { onClick: decrease }, "decrease"),
-      jsx("span", null, count),
+      jsx("span", { className: styles.text }, count),
       jsx("button", { onClick: increase }, "increase"),
     ])
   );
