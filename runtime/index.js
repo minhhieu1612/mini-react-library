@@ -109,7 +109,6 @@ const renderNode = (node) => {
               []
             );
 
-            console.log(childDOMs);
             element.append(...childDOMs);
           } else {
             element.append(
@@ -157,6 +156,7 @@ const renderNode = (node) => {
         }
       }
       break;
+    // function component
     case "function":
       {
         const functionComponentNode = node.type(node.props);
@@ -170,7 +170,6 @@ const renderNode = (node) => {
 
   if (element) node.bindDOM(element);
 
-  console.log(element, node);
   return element;
 };
 
