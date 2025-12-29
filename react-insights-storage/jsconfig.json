@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "checkJs": false,
+    "noCheck": true,
     "ignoreDeprecations": "6.0",
     "paths": {
       "dom-event-testing-library/*": ["./packages/dom-event-testing-library/*"],
@@ -32,15 +34,19 @@
       "react-server-dom-esm/*": ["./packages/react-server-dom-esm/*"],
       "react-server-dom-fb/*": ["./packages/react-server-dom-fb/*"],
       "react-server-dom-parcel/*": ["./packages/react-server-dom-parcel/*"],
-      "react-server-dom-turbopack/*": ["./packages/react-server-dom-turbopack/*"],
-      "react-server-dom-unbundled/*": ["./packages/react-server-dom-unbundled/*"],
+      "react-server-dom-turbopack/*": [
+        "./packages/react-server-dom-turbopack/*"
+      ],
+      "react-server-dom-unbundled/*": [
+        "./packages/react-server-dom-unbundled/*"
+      ],
       "react-server-dom-webpack/*": ["./packages/react-server-dom-webpack/*"],
       "react-suspense-test-utils/*": ["./packages/react-suspense-test-utils/*"],
       "react-test-renderer/*": ["./packages/react-test-renderer/*"],
       "scheduler/*": ["./packages/scheduler/*"],
       "shared/*": ["./packages/shared/*"],
       "use-subscription/*": ["./packages/use-subscription/*"],
-      "use-sync-external-store/*": ["./packages/use-sync-external-store/*"],
+      "use-sync-external-store/*": ["./packages/use-sync-external-store/*"]
     }
   }
 }
