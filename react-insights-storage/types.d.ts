@@ -119,3 +119,20 @@ type Fiber = {
   childLanes: any;
   alternate: any;
 };
+
+// ============== Hook types ============
+type UpdateQueue<S, A> = {
+  pending: Update<S, A> | null;
+  lanes: Lanes;
+  dispatch: ((A) => mixed) | null;
+  lastRenderedReducer: ((S, A) => S) | null;
+  lastRenderedState: S | null;
+};
+
+type Hook = {
+  memoizedState: any;
+  baseState: any;
+  baseQueue: Update<any, any> | null;
+  queue: any;
+  next: Hook | null;
+};

@@ -6,6 +6,40 @@
  * @typedef {T | (prev: T) => void} SetterValue
  */
 
+let inProgressHook = null;
+/** @type {ReactNode} */
+let currentWIPReactNode = null;
+
+const mountInProgressHook = () => {
+  const hook = {
+    memoizedState: null,
+    baseState: null,
+    baseQueue: null,
+    queue: null,
+    next: null
+  };
+
+  if (inProgressHook === null) {
+    currentWIPReactNode?.hooks = inProgressHook = hook;
+  } else {
+    inProgressHook = inProgressHook.next = hook;
+  }
+
+  return inProgressHook;
+};
+
+const mountState = (initialValue) => {
+  // create a hook data
+  const hook = mountInProgressHook(); 
+
+  hook.memoizedState = hook.baseState = initialValue;
+  
+};
+
+const HookDispatcherOnMount = {
+  useState: mountState,
+};
+
 /**
  * Hook to submit change and invoke rerendering on a component
  * @param {T} initValue

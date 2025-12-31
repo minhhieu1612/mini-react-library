@@ -24,6 +24,7 @@
  * @property {ReactChildren=} children
  * @property {HTMLElement=} domNode
  * @property {!ReactNode} _owner
+ * @property {any=} hooks
  */
 export class ReactNode {
   /**
@@ -38,6 +39,7 @@ export class ReactNode {
     this.children = children;
     this._owner = null;
     this.domNode = null;
+    this.hooks = null
   }
 
   bindOwner(owner) {
