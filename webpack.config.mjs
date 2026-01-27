@@ -8,6 +8,7 @@ const ROOT_DIR_PATH = path.dirname(fileURLToPath(import.meta.url));
 export default {
   entry: "./index.js",
   mode: "development",
+  devtool: 'inline-source-map',
   output: { path: path.resolve(ROOT_DIR_PATH, "dist") },
   devServer: {
     port: 3000,
@@ -44,7 +45,7 @@ export default {
   },
   resolve: {
     alias: {
-      runtime: path.resolve(ROOT_DIR_PATH, "runtime"),
+      lib: path.resolve(ROOT_DIR_PATH, "lib"),
       src: path.resolve(ROOT_DIR_PATH, "src"),
     },
     extensions: [".js", ".css"],

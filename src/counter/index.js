@@ -1,6 +1,6 @@
-import { Fragment } from "runtime/dom";
-import { useState } from "runtime/hooks";
-import { jsx } from "runtime/jsx";
+import { Fragment } from "lib/dom";
+import { useState } from "lib/hooks";
+import { jsx } from "lib/jsx";
 import styles from "./index.module.css";
 
 export default function Counter() {

@@ -1,4 +1,4 @@
-import { jsx } from "runtime/jsx";
+import { jsx } from "lib/jsx";
 import InputRefForm from "src/input-ref-form";
 import Counter from "./counter";
 
