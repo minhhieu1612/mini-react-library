@@ -1,4 +1,4 @@
-import { Fragment } from "lib/dom";
+import { ReactFragment } from "lib/dom";
 import { useState } from "lib/hooks";
 import { jsx } from "lib/jsx";
 import styles from "./index.module.css";
@@ -17,7 +17,7 @@ export default function Counter() {
   return jsx(
     "div",
     { className: styles.container },
-    jsx(Fragment, null, [
+    jsx(ReactFragment, null, [
       jsx("button", { onClick: decrease }, "decrease"),
       jsx("span", { className: styles.text }, count),
       jsx("button", { onClick: increase }, "increase"),
