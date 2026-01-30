@@ -11,17 +11,26 @@ renderRoot(jsx(App), document.getElementById("root"));
   |
   |---[p-jsx]
   |
-  |---[Counter-jsx]
-  |     |
-  |   [div-jsx]
-  |     |
-  |   [Fragment-jsx]
-  |     |
-  |     |---[button-jsx]
-  |     |
-  |     |---[span-jsx]
-  |     |
-  |     |---[button-jsx]
+  |   (
+  |   if we set state here, we are having an update, the update will
+  |   be made on the alternate tree then aggregate changes and submit
+  |   them on current tree eventually, alternate will hold following
+  |   properties:
+  |   + html node(div, span,...): new or modified dom prop changes(
+  |   className, width, style,...)
+  |   + react node: at present, no need to do something special
+  |   )
+  |---[Counter-jsx](current)           |---[Counter-jsx](alternate)
+  |     |                              |     |
+  |   [div-jsx]                        |   [div-jsx]
+  |     |                              |     |
+  |   [Fragment-jsx]                   |   [Fragment-jsx]
+  |     |                              |     |
+  |     |---[button-jsx]               |     |---[button-jsx]
+  |     |                              |     |
+  |     |---[span-jsx]                 |     |---[span-jsx]
+  |     |                              |     |
+  |     |---[button-jsx]               |     |---[button-jsx]
   |
   |---[InputRefForm-jsx]
         |
