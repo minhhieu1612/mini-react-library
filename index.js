@@ -33,12 +33,20 @@ renderRoot(jsx(App), document.getElementById("root"));
   |     |---[button-jsx]               |     |---[button-jsx]
   |
   |---[InputRefForm-jsx]
-        |
-      [div-jsx]
-        |
-        |---[input-jsx]
-        |
-        |---[button-jsx]
+  |      |
+  |    [div-jsx]
+  |      |
+  |      |---[input-jsx]
+  |      |
+  |      |---[button-jsx]
+  |
+  |---[ToggleLabel-jsx]
+  |      |
+  |    [div-jsx]
+  |      |
+  |      |---[button-jsx]
+  |      |
+  |      |---[span-jsx] (or empty node)
 
 On mount
 [Parent] - will have props, tag, and create a new dom node

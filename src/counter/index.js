@@ -1,18 +1,18 @@
 import { ReactFragment } from "lib/dom";
-import { useState } from "lib/hooks";
+import { useCallback, useState } from "lib/hooks";
 import { jsx } from "lib/jsx";
 import styles from "./index.module.css";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
 
-  const decrease = () => {
+  const decrease = useCallback(() => {
     setCount((prev) => prev - 1);
-  };
+  }, []);
 
-  const increase = () => {
+  const increase = useCallback(() => {
     setCount((prev) => prev + 1);
-  };
+  }, []);
 
   return jsx(
     "div",
@@ -21,6 +21,6 @@ export default function Counter() {
       jsx("button", { onClick: decrease }, "decrease"),
       jsx("span", { className: styles.text }, count),
       jsx("button", { onClick: increase }, "increase"),
-    ])
+    ]),
   );
 }
