@@ -1,10 +1,10 @@
-import { useState } from "lib/hooks";
+import { useCallback, useState } from "lib/hooks";
 import { jsx } from "lib/jsx";
 
 export default function ToggleLabel() {
   const [show, setShow] = useState(false);
 
-  const toggle = () => setShow((prev) => !prev);
+  const toggle = useCallback(() => setShow((prev) => !prev), []);
 
   return jsx("div", null, [
     jsx("button", { onClick: toggle }, "toggle"),
