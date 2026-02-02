@@ -1,6 +1,7 @@
 import { useRef } from "lib/hooks";
 import { jsx } from "lib/jsx";
 
+
 export default function InputRefForm() {
   const inputRef = useRef(null);
   const printRefValue = () => {

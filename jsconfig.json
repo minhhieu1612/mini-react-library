@@ -6,6 +6,6 @@
       "lib/*": ["./lib/*"]
     }
   },
-  "include": ["*"],
+  "include": ["src", "lib", "index.js"],
   "exclude": ["node_modules"]
 }

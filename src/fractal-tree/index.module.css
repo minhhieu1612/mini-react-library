@@ -1,0 +1,37 @@
+.container {
+  padding: 20px;
+  border: 1px solid;
+}
+
+.controlWrapper {
+  margin-bottom: 5rem;
+}
+
+.controlWrapper button {
+  margin-right: 5px;
+}
+
+.branch {
+  height: 2px;
+  background-color: red;
+
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+.tree {
+  transform: rotate(-90deg) translate(-160px, 104px);
+  width: 600px;
+  height: 660px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree > .branch {
+  position: relative;
+  margin: 200px 0;
+  top: 0;
+  left: 0;
+}
