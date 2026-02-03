@@ -1,13 +1,13 @@
-import { useCallback, useState } from "lib/hooks";
+import { useCallback, useEffect, useRef, useState } from "lib/hooks";
 import styles from "./index.module.css";
 import { jsx } from "lib/jsx";
 
 const treeConfig = {
-  ROOT_LENGTH: 320,
-  ANGLE: 45,
-  BRANCH_RATIO: 3 / 5,
-  BRANCH_TRANSLATE_X: 42,
-  BRANCH_TRANSLATE_Y: 116,
+  ROOT_LENGTH: 160,
+  ANGLE: 30,
+  BRANCH_RATIO: 3 / 4,
+  BRANCH_TRANSLATE_X: 12,
+  BRANCH_TRANSLATE_Y: 40,
 };
 
 const branchTypeEnum = {
@@ -16,8 +16,18 @@ const branchTypeEnum = {
   RIGHT: "right",
 };
 
+const treeStateEnum = {
+  GROWING: "growing",
+  SHRINKING: "shrinking",
+};
+
+const baseLevel = 3;
+const maximumLevel = 14;
+
 export default function FractalTree() {
-  const [level, setLevel] = useState(2);
+  const [level, setLevel] = useState(baseLevel);
+  const intervalId = useRef();
+  const treeState = useRef(treeStateEnum.GROWING);
 
   const levelUp = useCallback(() => setLevel((prev) => prev + 1), []);
   const downgrade = useCallback(
@@ -76,13 +86,42 @@ export default function FractalTree() {
       );
   };
 
+  useEffect(() => {
+    function automateGrowAndShrink() {
+      intervalId.current = setInterval(() => {
+        setLevel((prev) => {
+          if (treeState.current === treeStateEnum.GROWING) {
+            if (prev < maximumLevel) {
+              return prev + 1;
+            }
+            treeState.current = treeStateEnum.SHRINKING;
+            return prev - 1;
+          }
+          if (prev > baseLevel) return prev - 1;
+          treeState.current = treeStateEnum.GROWING;
+          return prev + 1;
+        });
+      }, 500);
+    }
+
+    automateGrowAndShrink();
+
+    return () => {
+      if (intervalId.current) clearInterval(intervalId.current);
+    };
+  }, []);
+
   return jsx("div", { className: styles.container }, [
     jsx("h3", { className: "heading" }, "Fractal Tree"),
     jsx("div", { className: styles.controlWrapper }, [
       jsx("button", { onClick: downgrade }, "Downgrade"),
       jsx("button", { onClick: levelUp }, "Level up"),
       jsx("span", null, "Current level: " + level),
-      jsx("span", null, "Number of rendered nodes: " + (Math.pow(2, level + 1) - 1)),
+      jsx(
+        "span",
+        null,
+        "Number of rendered nodes: " + (Math.pow(2, level + 1) - 1),
+      ),
     ]),
     jsx("div", { className: styles.tree }, renderTree()),
   ]);
