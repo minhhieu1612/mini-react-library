@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const ROOT_DIR_PATH = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
-  entry: "./index.js",
+  entry: "./src/index.js",
   mode: "development",
   devtool: 'inline-source-map',
   output: { path: path.resolve(ROOT_DIR_PATH, "dist") },

@@ -77,11 +77,12 @@ export default function FractalTree() {
   };
 
   return jsx("div", { className: styles.container }, [
-    jsx("h1", { className: "heading" }, "Fractal Tree"),
+    jsx("h3", { className: "heading" }, "Fractal Tree"),
     jsx("div", { className: styles.controlWrapper }, [
       jsx("button", { onClick: downgrade }, "Downgrade"),
       jsx("button", { onClick: levelUp }, "Level up"),
       jsx("span", null, "Current level: " + level),
+      jsx("span", null, "Number of rendered nodes: " + (Math.pow(2, level + 1) - 1)),
     ]),
     jsx("div", { className: styles.tree }, renderTree()),
   ]);

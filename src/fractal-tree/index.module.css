@@ -1,6 +1,8 @@
 .container {
   padding: 20px;
   border: 1px solid;
+  overflow: hidden;
+  margin-top: 20px;
 }
 
 .controlWrapper {
@@ -9,6 +11,9 @@
 
 .controlWrapper button {
   margin-right: 5px;
+}
+.controlWrapper span {
+  margin-right: 10px;
 }
 
 .branch {
@@ -21,8 +26,8 @@
 }
 
 .tree {
-  transform: rotate(-90deg) translate(-160px, 104px);
-  width: 600px;
+  transform: rotate(-90deg) translate(-160px, 100px);
+  width: 538px;
   height: 660px;
   display: flex;
   justify-content: center;
