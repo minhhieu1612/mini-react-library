@@ -12,10 +12,8 @@
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
-    "@babel/preset-react": "^7.24.1",
     "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "style-loader": "^4.0.0",
     "webpack": "^5.91.0",
@@ -24,6 +22,6 @@
     "html-webpack-plugin": "^5.6.0"
   },
   "keywords": [],
-  "author": "",
+  "author": "calvin.nguyen.dev@gmail.com",
   "license": "ISC"
 }
