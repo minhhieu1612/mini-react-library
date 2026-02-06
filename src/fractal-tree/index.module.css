@@ -18,11 +18,20 @@
 
 .branch {
   height: 2px;
-  background-color: red;
-
   position: absolute;
   top: 0;
   left: 100%;
+  transition: all 0.7s;
+}
+
+.branch::after {
+  content: "";
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background-color: red;
+  width: 100%;
+  /* animation: growUp 0.7s ease; */
 }
 
 .tree {
@@ -39,4 +48,14 @@
   margin: 200px 0;
   top: 0;
   left: 0;
+}
+
+@keyframes growUp {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
 }

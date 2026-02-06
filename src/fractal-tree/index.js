@@ -21,11 +21,18 @@ const treeStateEnum = {
   SHRINKING: "shrinking",
 };
 
-const baseLevel = 3;
-const maximumLevel = 14;
+const treeStageEnum = {
+  YOUNG: "young",
+  MIDDLE_AGED: "middle aged",
+  OLD: "old",
+};
+
+const baseLevel = 1;
+const maximumLevel = 10;
 
 export default function FractalTree() {
   const [level, setLevel] = useState(baseLevel);
+  const [stage, setStage] = useState(treeStageEnum.YOUNG);
   const intervalId = useRef();
   const treeState = useRef(treeStateEnum.GROWING);
 
@@ -36,6 +43,8 @@ export default function FractalTree() {
   );
 
   const renderTree = (loopLevel = 0, branchType = branchTypeEnum.ROOT) => {
+    for (let i = 0; i < 1e6; i++) {}
+
     if (loopLevel === level)
       return jsx(
         "div",
@@ -101,7 +110,7 @@ export default function FractalTree() {
           treeState.current = treeStateEnum.GROWING;
           return prev + 1;
         });
-      }, 500);
+      }, 0);
     }
 
     automateGrowAndShrink();
@@ -110,6 +119,19 @@ export default function FractalTree() {
       if (intervalId.current) clearInterval(intervalId.current);
     };
   }, []);
+
+  useEffect(() => {
+    const average = Math.floor((baseLevel + maximumLevel) / 2);
+    let newStage = treeStageEnum.YOUNG;
+
+    if (average - 1 <= level && level <= average + 1) {
+      newStage = treeStageEnum.MIDDLE_AGED;
+    } else if (level > average + 1) {
+      newStage = treeStageEnum.OLD;
+    }
+
+    setStage(newStage);
+  }, [level]);
 
   return jsx("div", { className: styles.container }, [
     jsx("h3", { className: "heading" }, "Fractal Tree"),
@@ -121,6 +143,11 @@ export default function FractalTree() {
         "span",
         null,
         "Number of rendered nodes: " + (Math.pow(2, level + 1) - 1),
+      ),
+      jsx(
+        "span",
+        { style: { textTransform: "capitalize" } },
+        "Stage: " + stage,
       ),
     ]),
     jsx("div", { className: styles.tree }, renderTree()),
