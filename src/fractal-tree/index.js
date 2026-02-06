@@ -43,7 +43,8 @@ export default function FractalTree() {
   );
 
   const renderTree = (loopLevel = 0, branchType = branchTypeEnum.ROOT) => {
-    for (let i = 0; i < 1e6; i++) {}
+    // long task simulation
+    // for (let i = 0; i < 1e7; i++) {}
 
     if (loopLevel === level)
       return jsx(
@@ -110,7 +111,7 @@ export default function FractalTree() {
           treeState.current = treeStateEnum.GROWING;
           return prev + 1;
         });
-      }, 0);
+      }, 700);
     }
 
     automateGrowAndShrink();
