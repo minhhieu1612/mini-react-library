@@ -5,9 +5,9 @@ import FractalTree from "./fractal-tree";
 
 const App = () => {
   return jsx("div", null, [
-    jsx("h1", null, "Hello, Mini React!"),
+    jsx("h1", { style: { margin: "8px 0px" } }, "Hello, Mini React!"),
     jsx(Counter),
-    jsx(InputRefForm),
+    // jsx(InputRefForm),
     jsx(FractalTree),
   ]);
 };

@@ -1,12 +1,16 @@
 .container {
-  padding: 20px;
+  padding: 0px 20px;
   border: 1px solid;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+.heading {
+  margin: 4px 0;
 }
 
 .controlWrapper {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 .controlWrapper button {
@@ -35,9 +39,9 @@
 }
 
 .tree {
-  transform: rotate(-90deg) translate(-160px, 100px);
+  transform: rotate(-90deg) translate(-176px, 100px);
   width: 538px;
-  height: 660px;
+  height: 583px;
   display: flex;
   justify-content: center;
   align-items: center;

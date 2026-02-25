@@ -6,7 +6,7 @@ const treeConfig = {
   ROOT_LENGTH: 160,
   ANGLE: 30,
   BRANCH_RATIO: 3 / 4,
-  BRANCH_TRANSLATE_X: 12,
+  BRANCH_TRANSLATE_X: 10,
   BRANCH_TRANSLATE_Y: 40,
 };
 
@@ -27,8 +27,8 @@ const treeStageEnum = {
   OLD: "old",
 };
 
-const baseLevel = 1;
-const maximumLevel = 10;
+const baseLevel = 0;
+const maximumLevel = 8;
 
 export default function FractalTree() {
   const [level, setLevel] = useState(baseLevel);

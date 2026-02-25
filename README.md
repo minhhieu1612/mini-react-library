@@ -14,6 +14,10 @@ _(This is a mini version of React Library with the purpose of researching deeper
 - Run `yarn dev` to start the example app (placed in` /src`)
 - To open react execution flow diagram: download the file first, then launch the file with this app: [Diagram Tool](https://app.diagrams.net/)
 
+
+### Demo example
+![demo image](./demo-mini-react.gif)
+
 ### Other features (can be updated in the near future)
 
 - Base features: Scheduler
